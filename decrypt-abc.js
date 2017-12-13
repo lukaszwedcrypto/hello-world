@@ -1,7 +1,12 @@
 const crypto = require('crypto');
+const utils = require('./utils');
 
-let decipher = crypto.createDecipher('aes-256-cbc', 'password');
-let decrypted = decipher.update('8879d6fe953762da435f3b9e9d747e6f', 'hex', 'utf8');
-decrypted += decipher.final('utf8');
+const secret = '8879d6fe953762da435f3b9e9d747e6f';
 
-console.log(decrypted); //abc
+utils.ask('Enter password: ').then(pass => {
+    let decipher = crypto.createDecipher('aes-256-cbc', pass);
+    let decrypted = decipher.update(secret, 'hex', 'utf8');
+    decrypted += decipher.final('utf8');
+    console.log(decrypted); //abc
+    console.log("pass" + pass)
+}).catch( err => console.log("Failed to decrypt"));
