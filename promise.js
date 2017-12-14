@@ -1,7 +1,6 @@
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-var xhr = new XMLHttpRequest();
-const url = 'https://api.coinmarketcap.com/v1/ticker/?limit=10';
+const url = 'https://api.coinmarketcap.com/v1/ticker/??convert=EUR&limit=10';
 
 let myAsyncFunction = url => {
     return new Promise((resolve, reject) => {
@@ -14,4 +13,16 @@ let myAsyncFunction = url => {
   }
 
 
-  myAsyncFunction(url).then(data => console.log(data));
+  myAsyncFunction(url).then(data => {
+      let altcoins = JSON.parse(data);
+      let output = '';
+      for (let altcoin of altcoins) {
+          output += `
+${altcoin.symbol} / ${altcoin.name} EUR ${altcoin.price_usd}
+${altcoin.percent_change_1h} % change in 1h
+${altcoin.percent_change_24h} $ change in 24h
+${altcoin.percent_change_7d} % change in 7d
+`;
+          console.log(output)
+      }
+  });
