@@ -10,7 +10,7 @@ const readFile = (fileName, callback) => {
 
 const saveFile = (fileName, data, callback) => {
     fs.writeFile(fileName, data, err => {
-        if (err) return console.error(`BOOM: $${err}`)
+        if (err) return console.error(`BOOM: ${err}`)
         log(`saved ${fileName} succesfully`)
         callback
     })
