@@ -4,6 +4,7 @@
   "description": "",
   "main": "decrypt-abc.js",
   "dependencies": {
+    "xhr2": "^0.1.4",
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {},
